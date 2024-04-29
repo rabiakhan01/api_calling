@@ -1,8 +1,8 @@
-
+import Listing from "./pages/Listing";
 function App() {
   return (
     <div className="App">
-      <h1>API Calling</h1>
+      <Listing />
     </div>
   );
 }
