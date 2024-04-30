@@ -1,48 +1,79 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../utils/Layout";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Listing = () => {
+    const navigate = useNavigate();
+    const [users, setUsers] = useState([]);
 
-    const [posts, setPosts] = useState([]);
-
-    const fetchData = async () => {
-        //return a promiss which has methods to handel the returned value
-        try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts/?_limit=30');
-            const result = await response.json();
-            console.log(response);
-            console.log(result);
-
-        } catch (error) {
-            console.log('failed to fetch the data')
-        }
+    //payload 
+    const payload = {
+        id: '13',
+        email: '1234@gmail.com',
+        first_name: 'adil',
+        last_name: 'ali',
     }
 
-    fetchData();
-    const post = posts.map((post) => {
+    //edn points
+    const endpoint = 'https://reqres.in/api/users/';
+
+    //get the representation of the specified end-point using get method
+    const getData = async () => {
+        const response = await axios.get(endpoint);
+        const result = response.data.data;
+        setUsers(result);
+        // console.log(result);
+    }
+
+    //post data on the specified end point
+    const AddData = () => {
+        axios.post(endpoint, payload)
+            .then(response => {
+                // console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
+    useEffect(() => {
+        AddData();
+        setTimeout(() => {
+            getData();
+        }, 2000)
+    }, [])
+
+    const handelEditUser = async (userId) => {
+        console.log(userId)
+        navigate(`/edit-user/${userId}`)
+    }
+    const user = users.map((user) => {
         return (
-            <tr key={post.id}>
-                <td className="border border-secondaryColor">{post.id}</td>
-                <td className="border border-secondaryColor">{post.title}</td>
-                <td className="border border-secondaryColor">{post.body}</td>
+            <tr key={user.id}>
+                <td className="border border-secondaryColor">{user.id}</td>
+                <td className="border border-secondaryColor">{user.email}</td>
+                <td className="border border-secondaryColor">{user.first_name + ' ' + user.last_name}</td>
+                <td className="border border-secondaryColor py-1"><button className="bg-secondaryColor px-2 py-1" onClick={() => handelEditUser(user.id)}>Edit</button></td>
             </tr>
         )
     })
+
     return (
         <Layout>
             <div className="flex flex-col w-full justify-center items-center">
-                <h1 className="text-3xl font-bold mb-10">Post Data</h1>
+                <h1 className="text-3xl font-bold mb-10">Users</h1>
                 <table className="text-center border border-secondaryColor">
-                    <thead className="">
+                    <thead>
                         <tr className="text-secondaryColor">
-                            <th className=" text-nowrap px-5 border border-secondaryColor">Post ID</th>
-                            <th className="px-5 border border-secondaryColor">Post Title</th>
-                            <th className="border border-secondaryColor">Description</th>
+                            <th className=" text-nowrap px-5 border border-secondaryColor">User ID</th>
+                            <th className="px-5 border border-secondaryColor">User Email</th>
+                            <th className="px-5 border border-secondaryColor">First Name</th>
+                            <th className="px-5 border border-secondaryColor">Action</th>
                         </tr>
                     </thead>
-                    <tbody className="">
-                        {post}
+                    <tbody>
+                        {user}
                     </tbody>
                 </table>
             </div>

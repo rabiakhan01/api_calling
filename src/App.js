@@ -1,11 +1,9 @@
-import Listing from "./pages/Listing";
+import Route from './Route/Route.js';
 import './index.js'
 function App() {
   return (
-    <div>
-      <Listing />
-    </div>
-  );
+    <Route />
+  )
 }
 
 export default App;
