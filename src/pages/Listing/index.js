@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../utils/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "../../components/Shared";
 
 const Listing = () => {
     const navigate = useNavigate();
@@ -15,11 +16,11 @@ const Listing = () => {
         last_name: 'ali',
     }
 
-    //edn points
+    //end points
     const endpoint = 'https://reqres.in/api/users/';
 
     //get the representation of the specified end-point using get method
-    const getData = async () => {
+    const getUserListing = async () => {
         const response = await axios.get(endpoint);
         const result = response.data.data;
         setUsers(result);
@@ -27,7 +28,7 @@ const Listing = () => {
     }
 
     //post data on the specified end point
-    const AddData = () => {
+    const addNewUser = () => {
         axios.post(endpoint, payload)
             .then(response => {
                 // console.log(response.data);
@@ -38,10 +39,8 @@ const Listing = () => {
     }
 
     useEffect(() => {
-        AddData();
-        setTimeout(() => {
-            getData();
-        }, 2000)
+        addNewUser();
+        getUserListing();
     }, [])
 
     const handelEditUser = async (userId) => {
@@ -59,26 +58,32 @@ const Listing = () => {
         )
     })
 
-    return (
-        <Layout>
-            <div className="flex flex-col w-full justify-center items-center">
-                <h1 className="text-3xl font-bold mb-10">Users</h1>
-                <table className="text-center border border-secondaryColor">
-                    <thead>
-                        <tr className="text-secondaryColor">
-                            <th className=" text-nowrap px-5 border border-secondaryColor">User ID</th>
-                            <th className="px-5 border border-secondaryColor">User Email</th>
-                            <th className="px-5 border border-secondaryColor">First Name</th>
-                            <th className="px-5 border border-secondaryColor">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {user}
-                    </tbody>
-                </table>
-            </div>
-        </Layout>
-    );
+    if (user.length > 0) {
+        return (
+            <Layout>
+                <div className="flex flex-col h-lvh w-full justify-center items-center">
+                    <h1 className="text-3xl font-bold mb-10">Users</h1>
+                    <table className="text-center border border-secondaryColor">
+                        <thead>
+                            <tr className="text-secondaryColor">
+                                <th className=" text-nowrap px-5 border border-secondaryColor">User ID</th>
+                                <th className="px-5 border border-secondaryColor">User Email</th>
+                                <th className="px-5 border border-secondaryColor">First Name</th>
+                                <th className="px-5 border border-secondaryColor">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {user}
+                        </tbody>
+                    </table>
+                </div>
+            </Layout>
+        );
+    }
+    else {
+        return <Loader />
+    }
+
 }
 
 export default Listing;
