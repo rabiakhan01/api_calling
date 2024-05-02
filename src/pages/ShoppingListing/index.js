@@ -7,8 +7,7 @@ import { Context } from "../../App";
 
 const ShoppingListing = () => {
 
-    const { quantity, addToCart } = useContext(Context);
-    console.log(quantity)
+    const { addToCart } = useContext(Context);
 
     return (
         <Layout>

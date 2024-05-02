@@ -7,7 +7,7 @@ const Navbar = () => {
 
     return (
         <nav className="flex w-full justify-end">
-            <button className="flex" onClick={addToCart}><p>Cart </p><p className="text-red-500">{quantity}</p></button>
+            <button className="flex"><p>Cart </p><p className="text-red-500">{quantity}</p></button>
         </nav>
     )
 }
