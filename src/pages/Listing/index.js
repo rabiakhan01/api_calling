@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../utils/Layout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Loader } from "../../components/Shared";
-import Modal from "../../components/Shared/Modal";
+import { Loader, Modal } from "../../components/Shared";
 import images from "../../assets/images/images";
 const Listing = () => {
     const navigate = useNavigate();
@@ -121,7 +120,6 @@ const Listing = () => {
                                 <button className="flex h-10 w-16 bg-transparent border border-zinc-200 justify-center items-center rounded-md" onClick={handelShowModal}>Cancel</button>
                                 <button className="flex h-10 w-16 bg-secondaryColor border border-zinc-200 justify-center items-center rounded-md" onClick={deleteSingleUser}>Delete</button>
                             </div>
-
                         </Modal>
                     }
                 </div>
@@ -131,7 +129,6 @@ const Listing = () => {
     else {
         return <Loader />
     }
-
 }
 
 export default Listing;
