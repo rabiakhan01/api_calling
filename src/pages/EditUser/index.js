@@ -35,9 +35,16 @@ const EditUser = () => {
     const handelUpdateUser = (event) => {
         event.preventDefault();
         console.log("updated user", user);
-        axios.put(endpoint + userId, user)
-            .then((response) => console.log("updated single detail", response))
-            .catch((error) => console.log("Put request error", error))
+
+        //put api
+        // axios.put(endpoint + userId, user)
+        //     .then((response) => console.log("updated single detail", response))
+        //     .catch((error) => console.log("Put request error", error))
+
+        // patch api
+        axios.patch(endpoint + userId, user)
+            .then((response) => console.log("user updated successfully", response))
+            .catch((error) => console.log("error ocuured in update user", error))
     }
 
     if (isEmpty) {
