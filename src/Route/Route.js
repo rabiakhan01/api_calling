@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import EditUser from "../pages/EditUser";
-
 import ShoppingListing from "../pages/ShoppingListing";
 import Cart from "../pages/Cart";
 
-const Route = ({ quantity, addToCart }) => {
+const Route = ({ addToCart, cartLength }) => {
+
 
     const router = createBrowserRouter([
         {
             path: '/',
             element: <ShoppingListing
-                quantity={quantity}
                 addToCart={addToCart}
+                cartLength={cartLength}
             />
         },
         {
@@ -21,7 +21,9 @@ const Route = ({ quantity, addToCart }) => {
         },
         {
             path: '/cart',
-            element: <Cart />
+            element: <Cart
+                cartLength={cartLength}
+            />
         }
     ])
     return (

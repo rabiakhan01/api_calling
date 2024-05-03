@@ -1,22 +1,29 @@
 import Route from './Route/Route.js';
 import { useState } from 'react';
-
+import { handelCart } from './utils/utils.js';
 import './index.js';
 
 
 
 function App() {
 
-  const [quantity, setQuantity] = useState(0);
+  const [cart, setCart] = useState(handelCart());
 
-  const addToCart = () => {
-    setQuantity(prevQunatity => prevQunatity + 1);
+  const addToCart = (cartData) => {
+    const cartList = [...cart, cartData];
+    const setItem = JSON.stringify(cartList);
+    localStorage.setItem('cartItems', setItem);
+    setCart(cartList);
+
   }
+  const cartLength = handelCart().length;
 
   return (
     <Route
-      quantity={quantity}
       addToCart={addToCart}
+      cartLength={cartLength}
+
+
     />
   )
 }
