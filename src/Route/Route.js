@@ -1,18 +1,27 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import EditUser from "../pages/EditUser";
-import Listing from "../pages/Listing";
-import ShoppingListing from "../pages/ShoppingListing";
 
-const Route = () => {
+import ShoppingListing from "../pages/ShoppingListing";
+import Cart from "../pages/Cart";
+
+const Route = ({ quantity, addToCart }) => {
+
     const router = createBrowserRouter([
         {
             path: '/',
-            element: <ShoppingListing />
+            element: <ShoppingListing
+                quantity={quantity}
+                addToCart={addToCart}
+            />
         },
         {
             path: '/edit-user/:userId',
             element: <EditUser />
+        },
+        {
+            path: '/cart',
+            element: <Cart />
         }
     ])
     return (

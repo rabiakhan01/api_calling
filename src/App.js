@@ -1,13 +1,9 @@
 import Route from './Route/Route.js';
-import { createContext, useState } from 'react';
+import { useState } from 'react';
 
 import './index.js';
 
 
-export const Context = createContext({
-  quantity: 0,
-  addToCart: () => { }
-})
 
 function App() {
 
@@ -18,9 +14,10 @@ function App() {
   }
 
   return (
-    <Context.Provider value={{ quantity, addToCart }}>
-      <Route />
-    </Context.Provider>
+    <Route
+      quantity={quantity}
+      addToCart={addToCart}
+    />
   )
 }
 

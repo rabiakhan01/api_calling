@@ -1,16 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import Layout from "../../utils/Layout";
 import staticData from "../../utils/staticData";
 import { ListingCard } from "../../components/Shared";
-import { Context } from "../../App";
 
 
-const ShoppingListing = () => {
-
-    const { addToCart } = useContext(Context);
+const ShoppingListing = ({ quantity, addToCart }) => {
 
     return (
-        <Layout>
+        <Layout
+            quantity={quantity}
+        >
             <div className="flex flex-col w-full">
                 {
                     staticData.map((product) => {

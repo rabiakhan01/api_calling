@@ -1,9 +1,7 @@
-import React, { useContext } from "react";
-import { Context } from "../../../App";
+import React from "react";
 
-const Navbar = () => {
 
-    const { quantity, addToCart } = useContext(Context);
+const Navbar = ({ quantity }) => {
 
     return (
         <nav className="flex w-full justify-end">
@@ -11,5 +9,6 @@ const Navbar = () => {
         </nav>
     )
 }
+
 
 export default Navbar;

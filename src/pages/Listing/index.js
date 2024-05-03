@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Loader, Modal } from "../../components/Shared";
 import images from "../../assets/images/images";
+
 const Listing = () => {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
