@@ -1,13 +1,22 @@
 import React from "react";
 import { Navbar } from "../../components/Shared";
 
-const Layout = ({ children, cartLength }) => {
+const Layout = ({ children, cartArray }) => {
+
+    // The total quantity in the cartArray to show on the top of navbar
+
+    let quantity = 0;
+
+    cartArray.map((item) => {
+        quantity = quantity + item.item_quantity;
+    })
+
 
     return (
 
         <div className='flex flex-col justify-center items-center mx-5 sm:mx-10 lg:mx-16 xl:mx-20 2xl:max-w-[1200px] 2xl:my-0 2xl:mx-auto'>
             <Navbar
-                cartLength={cartLength}
+                quantity={quantity}
             />
             {children}
         </div>

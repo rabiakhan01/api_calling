@@ -1,30 +1,40 @@
-import Route from './Route/Route.js';
+import React from 'react';
 import { useState } from 'react';
-import { handelCart } from './utils/utils.js';
 import './index.js';
+import ShoppingListing from './pages/ShoppingListing/index.js';
+import Cart from './pages/Cart/index.js';
+import Layout from './utils/Layout/index.js';
 
 
 
 function App() {
 
-  const [cart, setCart] = useState(handelCart());
-
-  const addToCart = (cartData) => {
-    const cartList = [...cart, cartData];
-    const setItem = JSON.stringify(cartList);
-    localStorage.setItem('cartItems', setItem);
-    setCart(cartList);
-
-  }
-  const cartLength = handelCart().length;
+  const [cartArray, setCartArray] = useState([]);
+  const [cartItemQuantity, setCartItemQuantity] = useState(0);
+  //update the total bill for all the products in the cart
+  const [totalBil, setTotalBil] = useState(0);
 
   return (
-    <Route
-      addToCart={addToCart}
-      cartLength={cartLength}
 
+    <Layout
+      cartArray={cartArray}
+    >
+      <ShoppingListing
+        cartArray={cartArray}
+        setCartArray={setCartArray}
+        setCartItemQuantity={setCartItemQuantity}
+        setTotalBil={setTotalBil}
 
-    />
+      />
+      <Cart
+        cartArray={cartArray}
+        setCartArray={setCartArray}
+        cartItemQuantity={cartItemQuantity}
+        totalBil={totalBil}
+        setTotalBil={setTotalBil}
+      />
+    </Layout>
+
   )
 }
 
